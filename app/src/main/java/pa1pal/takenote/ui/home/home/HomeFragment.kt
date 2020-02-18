@@ -46,7 +46,7 @@ class HomeFragment : Fragment() {
                 notesList = emptyList()
             }
             notesAdapter = NotesAdapter(notesList) {
-                GlobalScope.launch(Dispatchers.IO) {
+                GlobalScope.launch(Dispatchers.Main) {
                     val note = viewModel.getNoteFromId(it)
                     activity!!.supportFragmentManager.beginTransaction()
                         .replace(R.id.container,
