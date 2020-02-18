@@ -9,6 +9,9 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.home_fragment.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import pa1pal.takenote.R
 import pa1pal.takenote.database.AppDatabase
 import pa1pal.takenote.ui.home.CreateNoteFragment
@@ -37,27 +40,31 @@ class HomeFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = activity?.let { ViewModelProviders.of(it).get(HomeViewModel::class.java) }!!
-        var notesList = viewModel.getAllNotes().value
-        if (notesList == null) {
-            notesList = emptyList()
-        }
-        notesAdapter = NotesAdapter(notesList) {
-            val note = viewModel.getNoteFromId(it)
-            activity!!.supportFragmentManager.beginTransaction()
-                .replace(R.id.container,
-                    NoteViewFragment.newInstance(
-                        note
-                    ),
-                    NoteViewFragment.TAG
-                )
-                .commitNow()
+        GlobalScope.launch(Dispatchers.Main) {
+            var notesList = viewModel.getAllNotes().value
+            if (notesList == null) {
+                notesList = emptyList()
+            }
+            notesAdapter = NotesAdapter(notesList) {
+                GlobalScope.launch(Dispatchers.IO) {
+                    val note = viewModel.getNoteFromId(it)
+                    activity!!.supportFragmentManager.beginTransaction()
+                        .replace(R.id.container,
+                            NoteViewFragment.newInstance(
+                                note
+                            ),
+                            NoteViewFragment.TAG
+                        )
+                        .commitNow()
+                }
+            }
+
+            viewModel.getAllNotes().observe(viewLifecycleOwner, Observer {
+                notesAdapter.setData(it)
+            })
+            setupRecyclerView()
         }
 
-
-        viewModel.getAllNotes().observe(viewLifecycleOwner, Observer {
-            notesAdapter.setData(it)
-        })
-        setupRecyclerView()
 
         fab.setOnClickListener {
             activity!!.supportFragmentManager.beginTransaction()

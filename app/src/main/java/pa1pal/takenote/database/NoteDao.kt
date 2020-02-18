@@ -12,10 +12,10 @@ interface NoteDao {
     fun getAllNotes(): LiveData<List<Note>>
 
     @Query("SELECT * FROM note WHERE id=:id")
-    fun getNoteById(id: Int): Note
+    suspend fun getNoteById(id: Int): Note
 
     @Insert
-    fun insertAll(vararg users: Note)
+    suspend fun insertAll(vararg users: Note)
 
     @Delete
     fun delete(user: Note)
