@@ -9,14 +9,17 @@
         android:id="@+id/note_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-smallcaps"
         android:text="@string/title"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/note_details"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ellipsize="end"
+        android:fontFamily="monospace"
         android:maxLines="1"
         android:text="@string/note_detail"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
@@ -25,5 +28,5 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginTop="8dp"
-        android:background="@android:color/holo_green_light" />
+        android:background="@android:color/darker_gray" />
 </LinearLayout>

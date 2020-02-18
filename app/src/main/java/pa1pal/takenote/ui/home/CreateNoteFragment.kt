@@ -37,11 +37,13 @@ class CreateNoteFragment : Fragment() {
                 moveToNoteView(note)
             } else {
                 if (titleEditText.text?.isEmpty()!!) {
-                    titleTextInputLayout.error = getString(R.string.enter_title)
+                    titleEditText.error = getString(R.string.enter_title)
+                    titleEditText.requestFocus()
                 }
 
-                if (detailEditText.text?.isEmpty()!!) {
-                    titleTextInputLayout.error = getString(R.string.enter_note_detail)
+                if (detailEditText.text?.isEmpty()!! && titleEditText.text?.isNotEmpty()!!) {
+                    detailEditText.error = getString(R.string.enter_note_detail)
+                    detailEditText.requestFocus()
                 }
             }
         }

@@ -10,6 +10,7 @@ class HomeViewModel(context: Application) : AndroidViewModel(context) {
     private var appDatabase: AppDatabase = AppDatabase.getAppDatabase(context)
 
     fun getAllNotes(): LiveData<List<Note>> {
+        var notesList: LiveData<List<Note>>
         return appDatabase.userDao().getAllNotes()
     }
 

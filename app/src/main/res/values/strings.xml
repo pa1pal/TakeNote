@@ -8,4 +8,5 @@
     <string name="title">Title</string>
     <string name="enter_title">Enter Title</string>
     <string name="enter_note_detail">Enter Note detail</string>
+    <string name="save">save</string>
 </resources>
