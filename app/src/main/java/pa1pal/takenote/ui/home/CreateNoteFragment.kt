@@ -15,7 +15,7 @@ import java.security.Timestamp
 class CreateNoteFragment : Fragment() {
     companion object {
         fun newInstance() = CreateNoteFragment()
-        val TAG = "CreateNoteFragment"
+        const val TAG = "CreateNoteFragment"
     }
 
     private lateinit var viewModel: HomeViewModel
@@ -37,11 +37,11 @@ class CreateNoteFragment : Fragment() {
                 moveToNoteView(note)
             } else {
                 if (titleEditText.text?.isEmpty()!!) {
-                    titleTextInputLayout.error = "Enter Title"
+                    titleTextInputLayout.error = getString(R.string.enter_title)
                 }
 
                 if (detailEditText.text?.isEmpty()!!) {
-                    titleTextInputLayout.error = "Enter Note detail"
+                    titleTextInputLayout.error = getString(R.string.enter_note_detail)
                 }
             }
         }

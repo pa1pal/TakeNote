@@ -18,7 +18,7 @@ class HomeFragment : Fragment() {
 
     companion object {
         fun newInstance() = HomeFragment()
-        val TAG = "HomeFragment"
+        const val TAG = "HomeFragment"
     }
 
     private lateinit var viewModel: HomeViewModel
