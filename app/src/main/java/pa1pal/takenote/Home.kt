@@ -3,9 +3,8 @@ package pa1pal.takenote
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import pa1pal.takenote.ui.home.CreateNoteFragment
-import pa1pal.takenote.ui.home.HomeFragment
+import pa1pal.takenote.ui.home.home.HomeFragment
 import pa1pal.takenote.ui.home.NoteViewFragment
-
 
 class Home : AppCompatActivity() {
 

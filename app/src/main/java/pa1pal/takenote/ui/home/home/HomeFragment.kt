@@ -1,4 +1,4 @@
-package pa1pal.takenote.ui.home
+package pa1pal.takenote.ui.home.home
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -8,11 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.home_fragment.*
 import pa1pal.takenote.R
 import pa1pal.takenote.database.AppDatabase
-import pa1pal.takenote.ui.home.home.NotesAdapter
+import pa1pal.takenote.ui.home.CreateNoteFragment
+import pa1pal.takenote.ui.home.HomeViewModel
+import pa1pal.takenote.ui.home.NoteViewFragment
 
 class HomeFragment : Fragment() {
 
@@ -43,7 +44,12 @@ class HomeFragment : Fragment() {
         notesAdapter = NotesAdapter(notesList) {
             val note = viewModel.getNoteFromId(it)
             activity!!.supportFragmentManager.beginTransaction()
-                .replace(R.id.container, NoteViewFragment.newInstance(note), NoteViewFragment.TAG)
+                .replace(R.id.container,
+                    NoteViewFragment.newInstance(
+                        note
+                    ),
+                    NoteViewFragment.TAG
+                )
                 .commitNow()
         }
 
@@ -55,7 +61,10 @@ class HomeFragment : Fragment() {
 
         fab.setOnClickListener {
             activity!!.supportFragmentManager.beginTransaction()
-                .replace(R.id.container, CreateNoteFragment.newInstance(), CreateNoteFragment.TAG)
+                .replace(R.id.container,
+                    CreateNoteFragment.newInstance(),
+                    CreateNoteFragment.TAG
+                )
                 .commitNow()
         }
     }
